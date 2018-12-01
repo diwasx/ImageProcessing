@@ -1,4 +1,0 @@
-hello world!
-i have successfully added this file to this reposetory. i was not as hard as expected 
-now to make some chaneges to the file to check if it works or not. 
-ok i have tested how things works for now. will update soon.
