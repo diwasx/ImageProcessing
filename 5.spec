@@ -4,7 +4,7 @@ block_cipher = None
 
 
 a = Analysis(['5.pyw'],
-             pathex=['E:\\Projects\\Image Processing\\App'],
+             pathex=['E:\\Projects\\Image Processing\\ImageProcessing'],
              binaries=[],
              datas=[],
              hiddenimports=[],
