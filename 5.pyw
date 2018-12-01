@@ -8,7 +8,10 @@
 
 from PyQt5 import QtCore, QtGui, QtWidgets
 import cv2
+import math
+import numpy as np
 
+fileName=None
 class Ui_Dialog(object):
     def setupUi(self, Dialog):
         Dialog.setObjectName("Dialog")
@@ -60,11 +63,13 @@ class Ui_Dialog(object):
         self.btnUp.clicked.connect(self.setImage)
         self.btnOrg.clicked.connect(self.setOrg)
         self.btnGray.clicked.connect(self.setGray)
+        self.btnLog.clicked.connect(self.setLog)
+        self.btnPow.clicked.connect(self.setPower)
 
 
     def retranslateUi(self, Dialog):
         _translate = QtCore.QCoreApplication.translate
-        Dialog.setWindowTitle(_translate("Dialog", "Dialog"))
+        Dialog.setWindowTitle(_translate("Dialog", "Image Processing"))
         self.label.setText(_translate("Dialog", "Image"))
         self.btnUp.setText(_translate("Dialog", "Upload"))
         self.btnNeg.setText(_translate("Dialog", "Negative"))
@@ -77,43 +82,85 @@ class Ui_Dialog(object):
 
     ##
     def setNeg(self):
-        a=cv2.imread(fileName,1)
-        # a = cv2.resize(a, (1024, 768))
-        print(fileName)
-        print(a)
-        neg=255-a
-        cv2.imshow('negative',neg)
-        cv2.waitKey(0)
+        if fileName:
+            a=cv2.imread(fileName,1)
+            # a = cv2.resize(a, (1024, 768))
+            print(fileName)
+            print(a)
+            neg=255-a
+            cv2.imshow('negative',neg)
+            cv2.waitKey(0)
+        else: 
+            print("no file selected")
+            
 
     def setOrg(self):
-        a=cv2.imread(fileName,1)
-        cv2.imshow('original',a)
-        cv2.waitKey(0)
-        
+        if fileName:
+            a=cv2.imread(fileName,1)
+            print(a) 
+            cv2.imshow('original',a)
+            cv2.waitKey(0)
+        else: 
+            print("no file selected")
+            
+            
     def setGray(self):
-        a=cv2.imread(fileName,0)
-        cv2.imshow('original',a)
-        cv2.waitKey(0)
+        if fileName:
+            a=cv2.imread(fileName,0)
+            print(a) 
+            cv2.imshow('Gray',a)
+            cv2.waitKey(0)
+        else: 
+            print("no file selected")
+            
 
     def setLog(self):
-        a=cv2.imread(fileName,1)
-        cv2.imshow('original',a)
-        cv2.waitKey(0)
+        if fileName:
+            a=cv2.imread(fileName,0)
+            c=.3
+            # s=c*np.log10(1+a)
+            s=c*np.uint8(np.log1p(a))
+            s=cv2.normalize(s, None, 0, 255, cv2.NORM_MINMAX, dtype = cv2.CV_8U)
+            print(s)
+            cv2.imshow('Log Transformation',s)
+            cv2.waitKey(0)
+        else: 
+            print("no file selected")
+            
 
     def setLI(self):
-        a=cv2.imread(fileName,1)
-        cv2.imshow('original',a)
-        cv2.waitKey(0)
+        if fileName:
+            a=cv2.imread(fileName,1)
+            cv2.imshow('original',a)
+            cv2.waitKey(0)
+        else: 
+            print("no file selected")
+            
 
     def setPower(self):
-        a=cv2.imread(fileName,1)
-        cv2.imshow('original',a)
-        cv2.waitKey(0)
+        if fileName:
+            a=cv2.imread(fileName,1)
+            c=1
+            g=0.3
+            s=c*pow(a,g)
+            print(s)
+            s=cv2.normalize(s, None, 0, 255, cv2.NORM_MINMAX, dtype = cv2.CV_8U)
+            print(s)
+            cv2.imshow('Nth power',s)
+            cv2.waitKey(0)
+        else: 
+            print("no file selected")
+            
+
 
     def setRoot(self):
-        a=cv2.imread(fileName,1)
-        cv2.imshow('original',a)
-        cv2.waitKey(0)
+        if fileName:
+            a=cv2.imread(fileName,1)
+            cv2.imshow('original',a)
+            cv2.waitKey(0)
+        else: 
+            print("no file selected")
+            
 
     def setImage(self):
         global fileName
