@@ -1,8 +1,0 @@
-To run this python app you need:
-
-code are:
-
-pip3 install opencv-python matplotlib numpy
-
-
-ma hada hu
